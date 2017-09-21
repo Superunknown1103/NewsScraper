@@ -46,7 +46,7 @@ app.get("/scrape", function(req, res) {
       // Save the text and href of each link enclosed in the current element
       var title = $(this).text();
       console.log(title);
-
+      
       // If this found element had both a title and a link
       if (title && link) {
         // Insert the data in the scrapedData db
