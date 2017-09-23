@@ -1,14 +1,15 @@
 // We'll be rewriting the table's data frequently, so let's make our code more DRY
 // by writing a function that takes in 'animals' (JSON) and creates a table body
-function displayResults(scraped) {
+function displayResults(scrapeddb) {
   // First, empty the table
   $("tbody").empty();
 
   // Then, for each entry of that json...
-  scraped.forEach(function(scraped) {
+  scrapeddb.forEach(function(scrapeddb) {
     // Append each of the animal's properties to the table
-    $("tbody").append("<tr><td>" + scraped.title + "</td>" +
-                         "<td>" + scraped.link + "</td></tr>");
+    $("tbody").append("<tr><td>" + scrapeddb.title + "</td>" + "<td>" + scrapeddb.summary + "</td>" +
+                         "<td>" + scrapeddb.link + "</td></tr>"
+              );
   });
 }
 
@@ -23,9 +24,9 @@ function setActive(selector) {
 // ==========
 
 // First thing: ask the back end for json with all animals
-$.getJSON("/all", function(scraped) {
+$.getJSON("/all", function(scrapeddb) {
   // Call our function to generate a table body
-  displayResults(scraped);
+  displayResults(scrapeddb);
 });
 
 // 2: Button Interactions
@@ -37,20 +38,20 @@ $("#weight-sort").on("click", function() {
   setActive("#animal-weight");
 
   // Do an api call to the back end for json with all animals sorted by weight
-  $.getJSON("/weight", function(scraped) {
+  $.getJSON("/weight", function(scrapeddb) {
     // Call our function to generate a table body
-    displayResults(scraped);
+    displayResults(scrapeddb);
   });
 });
 
 // When user clicks the name sort button, display the table sorted by name
 $("#name-sort").on("click", function() {
   // Set new column as currently-sorted (active)
-  setActive("#animal-name");
+  setActive("name");
 
   // Do an api call to the back end for json with all animals sorted by name
-  $.getJSON("/name", function(scraped) {
+  $.getJSON("/name", function(scrapeddb) {
     // Call our function to generate a table body
-    displayResults(scraped);
+    displayResults(scrapeddb);
   });
 });
