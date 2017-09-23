@@ -1,13 +1,16 @@
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
+// Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
+
+// Initialize Express
 var app = express();
 
 // Database configuration
 var databaseUrl = "scraper";
-var collections = ["scrapedData"];
+var collections = ["datascrape"];
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
@@ -22,8 +25,8 @@ app.get("/", function(req, res) {
 
 // Retrieve data from the db
 app.get("/all", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function(error, found) {
+  // Find all results from the datascrape collection in the db
+  db.datascrape.find({}, function(error, found) {
     // Throw any errors to the console
     if (error) {
       console.log(error);
@@ -37,20 +40,20 @@ app.get("/all", function(req, res) {
 
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function(req, res) {
-  // request to scrape reddit
-  request("https://www.reddit.com/", function(error, body) {
+  // Make a request for the news section of ycombinator
+  request("http://www.theonion.com/section/politics/", function(error, response, html) {
     // Load the html body from request into cheerio
-    var $ = cheerio.load(body);
+    var $ = cheerio.load(html);
     // For each element with a "title" class
-    $('p.title').each(function(i, element) {
+    $(".summary").each(function(i, element) {
       // Save the text and href of each link enclosed in the current element
-      var title = $(this).text();
-      console.log(title);
-      
+      var title = $(element).children(".info").children(".inner").children("header").children(".headline").children("a").attr("title");
+      var link = $(element).children("a").attr("href");
+
       // If this found element had both a title and a link
       if (title && link) {
-        // Insert the data in the scrapedData db
-        db.scrapedData.insert({
+        // Insert the data in the datascrape db
+        db.datascrape.insert({
           title: title,
           link: link
         },
