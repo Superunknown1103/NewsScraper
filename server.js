@@ -25,6 +25,7 @@ app.get("/", function(req, res) {
 
 // Retrieve data from the db
 app.get("/all", function(req, res) {
+
   // Find all results from the scraped collection in the db
   db.scraped.find({}, function(error, found) {
     // Throw any errors to the console
