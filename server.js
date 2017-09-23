@@ -10,7 +10,7 @@ var app = express();
 
 // Database configuration
 var databaseUrl = "scraper";
-var collections = ["datascrape"];
+var collections = ["scraped"];
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
@@ -25,8 +25,8 @@ app.get("/", function(req, res) {
 
 // Retrieve data from the db
 app.get("/all", function(req, res) {
-  // Find all results from the datascrape collection in the db
-  db.datascrape.find({}, function(error, found) {
+  // Find all results from the scraped collection in the db
+  db.scraped.find({}, function(error, found) {
     // Throw any errors to the console
     if (error) {
       console.log(error);
@@ -48,12 +48,12 @@ app.get("/scrape", function(req, res) {
     $(".summary").each(function(i, element) {
       // Save the text and href of each link enclosed in the current element
       var title = $(element).children(".info").children(".inner").children("header").children(".headline").children("a").attr("title");
-      var link = $(element).children("a").attr("href");
+      var link = "http://www.theonion.com" + $(element).children(".info").children(".inner").children("header").children(".headline").children("a").attr("href");
 
       // If this found element had both a title and a link
       if (title && link) {
-        // Insert the data in the datascrape db
-        db.datascrape.insert({
+        // Insert the data in the scraped db
+        db.scraped.insert({
           title: title,
           link: link
         },
