@@ -11,8 +11,16 @@ body {
 h1 {
   width: 100%;
   text-align: center;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Amatic SC';
   font-size: 250%;
+  margin-bottom: 20px;
+}
+
+h2{
+  width: 100%;
+  text-align: center;
+  font-family: 'Amatic SC', cursive;
+  margin-bottom: -10px;
 }
 
 h3 {
@@ -26,9 +34,13 @@ h3 {
 	text-align: center;
 }
 
+#summary, #link, #name, #article{
+  font-family: 'News Cycle', sans-serif;
+}
 #comment{
   width: 40%;
   text-align: center;
+  font-family: 'News Cycle', sans-serif;
 }
 
 table,

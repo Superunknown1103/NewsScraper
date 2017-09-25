@@ -8,8 +8,11 @@ function displayResults(scrapeddb) {
   // Then, for each entry of that json...
   scrapeddb.forEach(function(scrapeddb) {
     // Append each of the animal's properties to the table
-    $("tbody").append("<tr id='article'><td>" + scrapeddb.title + "</td>" + "<td>" + scrapeddb.summary + "</td>" +
-                         "<td>" + "<a href=" + "'" + scrapeddb.link + "'>Full Article</a>" + "</td>" + "<td id='comment'>" + "<form method='post'><textarea rows='4' cols='100' style='width:500px;' type='text' name='comment' id='comment' /><br />" + "</td"+
+    $("tbody").append("<tr id='article'><td>" + scrapeddb.title + "</td>" + "<td id='article'>" + scrapeddb.summary + "</td>" +
+                         "<td id='article'>" + "<a href=" + "'" + scrapeddb.link + "'>Full Article</a>" + "</td>" + 
+                         "<td id='comment'>" + 
+                         "<form method='post'><textarea rows='4' cols='100' style='width:500px;' type='text' name='comment' id='comment' /><br /><input type='submit' value='Submit'>" + 
+                         "</td>" +
                          "</tr>"
       );
             });
