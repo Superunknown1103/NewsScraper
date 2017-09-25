@@ -9,7 +9,7 @@ function displayResults(scrapeddb) {
   scrapeddb.forEach(function(scrapeddb) {
     // Append each of the animal's properties to the table
     $("tbody").append("<tr id='article'><td>" + scrapeddb.title + "</td>" + "<td>" + scrapeddb.summary + "</td>" +
-                         "<td><div>Read More Here" + "<a href='" + scrapeddb.link + "'></div>" + "</td>" + "<td id='comment'>" + commentDiv + "</td></tr>"
+                         "<td>" + scrapeddb.link + "</td>" + "<td id='comment'>" + commentDiv + "</td></tr>"
       );
   $("<td id='comment'>").each(function( index ) {
     $("#comment").append(commentDiv);
