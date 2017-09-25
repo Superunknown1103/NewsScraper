@@ -40,6 +40,7 @@ app.get("/all", function(req, res) {
 });
 
 // Scrape data from one site and place it into the mongodb db
+
 app.get("/scrape", function(req, res) {
   // Make a request for the news section of ycombinator
   request("http://www.theonion.com/section/politics/", function(error, response, html) {

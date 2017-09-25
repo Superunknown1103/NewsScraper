@@ -9,11 +9,11 @@ function displayResults(scrapeddb) {
   scrapeddb.forEach(function(scrapeddb) {
     // Append each of the animal's properties to the table
     $("tbody").append("<tr id='article'><td>" + scrapeddb.title + "</td>" + "<td>" + scrapeddb.summary + "</td>" +
-                         "<td>" + scrapeddb.link + "</td>" + "<td id='comment'>" + commentDiv + "</td></tr>"
-              ),
- // Adding custom HTML and CSS for a commentbox.
-    // $("#comment").append(commentDiv)
-
+                         "<td><div>Read More Here" + "<a href='" + scrapeddb.link + "'></div>" + "</td>" + "<td id='comment'>" + commentDiv + "</td></tr>"
+      );
+  $("<td id='comment'>").each(function( index ) {
+    $("#comment").append(commentDiv);
+  });
             });
           };
 
@@ -31,31 +31,4 @@ function setActive(selector) {
 $.getJSON("/all", function(scrapeddb) {
   // Call our function to generate a table body
   displayResults(scrapeddb);
-});
-
-// 2: Button Interactions
-// ======================
-
-// When user clicks the weight sort button, display table sorted by weight
-$("#weight-sort").on("click", function() {
-  // Set new column as currently-sorted (active)
-  setActive("#animal-weight");
-
-  // Do an api call to the back end for json with all animals sorted by weight
-  $.getJSON("/weight", function(scrapeddb) {
-    // Call our function to generate a table body
-    displayResults(scrapeddb);
-  });
-});
-
-// When user clicks the name sort button, display the table sorted by name
-$("#name-sort").on("click", function() {
-  // Set new column as currently-sorted (active)
-  setActive("name");
-
-  // Do an api call to the back end for json with all animals sorted by name
-  $.getJSON("/name", function(scrapeddb) {
-    // Call our function to generate a table body
-    displayResults(scrapeddb);
-  });
 });
