@@ -3,20 +3,17 @@
 function displayResults(scrapeddb) {
   // First, empty the table
   $("tbody").empty();
-  var commentDiv = $("<div class='container'><div class='dialogbox'><div class='body'><span class='tip tip-up'></span><div class='message'>Leave a comment<form><input type='text'><input type='submit'></form></span></div></div></div>");
+  var commentDiv = $("<div class='container'><form><input type='text'><input type='submit'></form></div>");
 
   // Then, for each entry of that json...
   scrapeddb.forEach(function(scrapeddb) {
     // Append each of the animal's properties to the table
     $("tbody").append("<tr id='article'><td>" + scrapeddb.title + "</td>" + "<td>" + scrapeddb.summary + "</td>" +
-                         "<td>" + scrapeddb.link + "</td>" + "<td id='comment'>" + commentDiv + "</td></tr>"
+                         "<td>" + "<a href=" + "'" + scrapeddb.link + "'>Full Article</a>" + "</td>" + "<td id='comment'>" + "<form method='post'><textarea rows='4' cols='100' style='width:500px;' type='text' name='comment' id='comment' /><br />" + "</td"+
+                         "</tr>"
       );
-  $("<td id='comment'>").each(function( index ) {
-    $("#comment").append(commentDiv);
-  });
             });
           };
-
 // Bonus function to change "active" header
 function setActive(selector) {
   // remove and apply 'active' class to distinguish which column we sorted by
