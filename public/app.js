@@ -1,5 +1,6 @@
 // We'll be rewriting the table's data frequently, so let's make our code more DRY
 // by writing a function that takes in 'animals' (JSON) and creates a table body
+
 function displayResults(scrapeddb) {
   // First, empty the table
   $("tbody").empty();
@@ -16,16 +17,18 @@ function displayResults(scrapeddb) {
                          "</tr>"
       );
             });
-          };
-// Bonus function to change "active" header
-function setActive(selector) {
-  // remove and apply 'active' class to distinguish which column we sorted by
-  $("th").removeClass("active");
-  $(selector).addClass("active");
-}
+          }
 
-// 1: On Load
-// ==========
+$("#scrape").on("click", function(){
+            console.log("scraping");
+            $.get("/scrape")
+            .done(function(scrapeddb){
+                console.log('done');
+                $.getJSON("/all", function(scrapeddb){
+                    displayResults(scrapeddb);
+                })
+            });
+        });
 
 // First thing: ask the back end for json with all animals
 $.getJSON("/all", function(scrapeddb) {
