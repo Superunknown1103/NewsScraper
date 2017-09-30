@@ -4,7 +4,8 @@ var mongojs = require("mongojs");
 // Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
-
+mongoose.connect(mongodb:heroku_vv17n3g7:i2bips7qnqjnof5h0n18u9248m@ds155644.mlab.
+com:55644/heroku_vv17n3g7);
 // Initialize Express
 var app = express();
 app.use(express.static("public"));
